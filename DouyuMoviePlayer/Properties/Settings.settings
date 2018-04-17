@@ -1,0 +1,18 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Douyu.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="MoviePlayer" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Program Files\DAUM\PotPlayer\PotPlayerMini64.exe</Value>
+    </Setting>
+    <Setting Name="PlayerProcessName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">PotPlayerMini64</Value>
+    </Setting>
+    <Setting Name="SavedRoom" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">122402</Value>
+    </Setting>
+    <Setting Name="MovieDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">E:\Movies</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
