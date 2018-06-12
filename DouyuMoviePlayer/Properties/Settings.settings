@@ -14,5 +14,8 @@
     <Setting Name="MovieDir" Type="System.String" Scope="User">
       <Value Profile="(Default)">E:\Movies</Value>
     </Setting>
+    <Setting Name="ConnectionString" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=10.0.0.2;Initial Catalog=Douyu2;User ID=sa;Password=Jack52664638</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

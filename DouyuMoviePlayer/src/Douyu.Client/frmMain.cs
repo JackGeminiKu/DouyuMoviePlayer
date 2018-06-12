@@ -26,7 +26,7 @@ namespace Douyu.Client
 
         void MovieService_StartPlayMovie(string movieName)
         {
-            lblMovieName.SetTextSafe(Path.GetFileNameWithoutExtension(movieName));
+            lblMovieName.SetTextCrossThread(Path.GetFileNameWithoutExtension(movieName));
         }
 
         void SetFormLocation()
