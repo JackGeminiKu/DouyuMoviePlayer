@@ -60,8 +60,8 @@ namespace Douyu.Client
 
         private void bwMoviePlayer_DoWork(object sender, DoWorkEventArgs e)
         {
-            if (DbService.HasMovie(RoomId) == false) {
-                MessageBox.Show("系统中没有找到电影", "没有电影");
+            if (!DbService.HasMovie(RoomId)) {
+                MessageBox.Show("系统中没有找到电影", "没有电影", MessageBoxButtons.OK,MessageBoxIcon.Error);
                 return;
             }
 
@@ -87,7 +87,7 @@ namespace Douyu.Client
             if (dialog.ShowDialog() == DialogResult.Cancel)
                 return;
             foreach (string file in Directory.GetFiles(dialog.SelectedPath)) {
-                DbService.ImportNewMovie(RoomId, file);
+                DbService.ImportMovie(RoomId, file);
             }
             MessageBox.Show("导入电影完成", "导入电影");
         }

@@ -26,15 +26,19 @@ namespace Douyu.Client
                     MovieService.WaitPlayingFinish();
                 } else {
                     MovieService.WaitPlayingFinish();
-                    if (MovieService.PlayingEnabled) MovieService.PlayAdvert(roomId);
+                    if (MovieService.PlayingEnabled) 
+                        MovieService.PlayAdvert(roomId);
                 }
             }
 
             // 按序播放
             do {
-                if (MovieService.PlayingEnabled) MovieService.PlayMovie(roomId);
-                if (MovieService.PlayingEnabled) MovieService.PlayAdvert(roomId);
-                if (!MovieService.PlayingEnabled) MyThread.Wait(1000);
+                if (MovieService.PlayingEnabled) 
+                    MovieService.PlayMovie(roomId);
+                if (MovieService.PlayingEnabled) 
+                    MovieService.PlayAdvert(roomId);
+                if (!MovieService.PlayingEnabled) 
+                    MyThread.Wait(1000);
             } while (true);
         }
 
@@ -101,12 +105,6 @@ namespace Douyu.Client
         }
 
         static bool PlayingEnabled { get; set; }
-
-        static bool IsNumber(string text)
-        {
-            int result;
-            return int.TryParse(text, out result);
-        }
 
         public static event Action<string> StartPlayMovie;
     }

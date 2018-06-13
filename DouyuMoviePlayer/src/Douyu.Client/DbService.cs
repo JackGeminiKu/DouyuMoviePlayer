@@ -50,15 +50,15 @@ namespace Douyu.Client
             );
         }
 
-        public static void ImportNewMovie(int roomId, string movieFile)
+        public static void ImportMovie(int roomId, string movieFile)
         {
             string movieName = Path.GetFileNameWithoutExtension(movieFile);
 
-            var result = _conn.ExecuteScalar(
+            var count = _conn.ExecuteScalar(
                 "select count(*) from MovieScore where RoomId = @RoomId and MovieName = @MovieName",
                 new { RoomId = roomId, MovieName = movieName }
             );
-            if ((int)result != 0) {
+            if ((int)count != 0) {
                 return;
             }
 
@@ -70,7 +70,6 @@ namespace Douyu.Client
 
         public static bool HasAdvertMovie(int roomId)
         {
-
             var count = _conn.ExecuteScalar(
                 "select count(*) from MovieScore where RoomId = @RoomId and MovieName = @MovieName",
                 new { RoomId = roomId, MovieName = roomId }
@@ -81,8 +80,8 @@ namespace Douyu.Client
         public static bool HasMovie(int roomId)
         {
             var count = _conn.ExecuteScalar(
-                "select count(*) from MovieScore where RoomId = @RoomId and MovieName != @MovieName",
-                new { RoomId = roomId, MovieName = roomId }
+                "select count(*) from MovieScore where RoomId = @RoomId and MovieName != @AdvertMovie",
+                new { RoomId = roomId, AdvertMovie = roomId }
             );
             return (int)count > 0;
         }
@@ -90,18 +89,18 @@ namespace Douyu.Client
         public static void SetCurrentMovie(int roomId, string movieName)
         {
             _conn.Execute(
-                "update config set value = @MovieName where name = 'current movie' and room_id = @RoomId",
+                "update Config set value = @MovieName where Name = 'current movie' and RoomId = @RoomId",
                 new { MovieName = movieName, RoomId = roomId }
             );
         }
 
         public static void SaveAliasName(int roomId, string movieName, string movieAlias)
         {
-            var aliasInfo = _conn.Query(
-                "select * from MovieAlias where RoomId = @RoomId and MovieAlias = @MovieAlias",
+            var count = _conn.ExecuteScalar(
+                "select count(*) from MovieAlias where RoomId = @RoomId and MovieAlias = @MovieAlias",
                 new { RoomId = roomId, MovieAlias = movieAlias });
 
-            if (aliasInfo.Count() == 1) {
+            if ((int)count == 1) {
                 return;
             }
 
