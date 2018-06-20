@@ -81,7 +81,7 @@ namespace Douyu.Client
         {
             var count = _conn.ExecuteScalar(
                 "select count(*) from MovieScore where RoomId = @RoomId and MovieName != @AdvertMovie",
-                new { RoomId = roomId, AdvertMovie = roomId }
+                new { RoomId = roomId, AdvertMovie = roomId.ToString() }
             );
             return (int)count > 0;
         }
@@ -89,7 +89,7 @@ namespace Douyu.Client
         public static void SetCurrentMovie(int roomId, string movieName)
         {
             _conn.Execute(
-                "update Config set value = @MovieName where Name = 'current movie' and RoomId = @RoomId",
+                "update RoomInfo set value = @MovieName where Name = 'current movie' and RoomId = @RoomId",
                 new { MovieName = movieName, RoomId = roomId }
             );
         }
