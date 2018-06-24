@@ -33,16 +33,24 @@ namespace Douyu.Client
             movieFile = movieInfo.First().MovieFile;
         }
 
-        public static string GetAdvertMovie(int roomId)
+        public static string[] GetAllMovies()
         {
-            var result = _conn.ExecuteScalar(
-                "select MovieFile from MovieScore where RoomId = @RoomId and MovieName = @MovieName",
-                new { RoomId = roomId, MovieName = roomId }
-            );
-            return (string)result;
+            var movies = new List<string>();
+            foreach (var item in _conn.Query("select MovieFile from MovieScore")) {
+                movies.Add((string)item.MovieFile);
+            }
+            return movies.ToArray();
         }
 
-        public static void ClearTopMovie(int roomId, string movieFile)
+        public static string GetAdvertMovie(int roomId)
+        {
+            return _conn.ExecuteScalar<string>(
+                "select AdvertMovie from AdvertMovie where RoomId = @RoomId",
+                new { RoomId = roomId }
+            );
+        }
+
+        public static void ClearMovieScore(int roomId, string movieFile)
         {
             _conn.Execute(
                 "update MovieScore set MovieScore = 0 where RoomId = @RoomId and MovieFile = @MovieFile",
@@ -52,19 +60,50 @@ namespace Douyu.Client
 
         public static void ImportMovie(int roomId, string movieFile)
         {
-            string movieName = Path.GetFileNameWithoutExtension(movieFile);
+            var movieName = Path.GetFileNameWithoutExtension(movieFile);
 
             var count = _conn.ExecuteScalar(
                 "select count(*) from MovieScore where RoomId = @RoomId and MovieName = @MovieName",
                 new { RoomId = roomId, MovieName = movieName }
             );
             if ((int)count != 0) {
+                _conn.Execute(
+                    "update MovieScore set MovieFile = @MovieFile where RoomId = @RoomId and MovieName = @MovieName",
+                    new { RoomId = roomId, MovieName = movieName, MovieFile = movieFile }
+                );
                 return;
             }
 
             _conn.Execute(
-                "insert into MovieScore(RoomId, MovieName, MovieScore, MovieFile) values(@RoomId, @MovieName, @MovieScore, @MovieFile)",
-                new { RoomId = roomId, MovieName = movieName, MovieScore = 0, MovieFile = movieFile }
+                "insert into MovieScore(RoomId, MovieName, MovieFile, MovieScore) values(@RoomId, @MovieName, @MovieFile, @MovieScore)",
+                new { RoomId = roomId, MovieName = movieName, MovieFile = movieFile, MovieScore = 0, }
+            );
+        }
+
+        public static void ImportAdvert(string advertMovie)
+        {
+            var movieName = Path.GetFileNameWithoutExtension(advertMovie);
+            var roomId = 0;
+            if (!int.TryParse(movieName, out roomId)) {
+                MessageBox.Show("广告文件必须为数字(房间号)!", "导入广告", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            var count = _conn.ExecuteScalar(
+                "select count(*) from AdvertMovie where RoomId = @RoomId",
+                new { RoomId = roomId }
+            );
+            if ((int)count != 0) {
+                _conn.Execute(
+                    "update AdvertMovie set AdvertMovie = @AdvertMovie where RoomId = @RoomId",
+                    new { RoomId = roomId, AdvertMovie = advertMovie }
+                );
+                return;
+            }
+
+            _conn.Execute(
+                "insert into AdvertMovie(RoomId, AdvertMovie) values(@RoomId,  @AdvertMovie)",
+                new { RoomId = roomId, AdvertMovie = advertMovie }
             );
         }
 

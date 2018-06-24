@@ -12,41 +12,36 @@ namespace Douyu.Client
 {
     public static class MovieService
     {
-        static MovieService()
-        {
-            PlayingEnabled = true;
-        }
-
         public static void StartPlay(int roomId)
         {
-            PlayingEnabled = true;
+            PlayEnabled = true;
             // 当前正在播放?
-            if (MovieService.IsPlaying) {
-                if (MovieService.IsPlayingAdvert) {
-                    MovieService.WaitPlayingFinish();
+            if (IsPlaying) {
+                if (IsPlayingAdvert) {
+                    WaitPlayingFinish();
                 } else {
-                    MovieService.WaitPlayingFinish();
-                    if (MovieService.PlayingEnabled) 
-                        MovieService.PlayAdvert(roomId);
+                    WaitPlayingFinish();
+                    if (PlayEnabled)
+                        PlayAdvert(roomId);
                 }
             }
 
             // 按序播放
             do {
-                if (MovieService.PlayingEnabled) 
-                    MovieService.PlayMovie(roomId);
-                if (MovieService.PlayingEnabled) 
-                    MovieService.PlayAdvert(roomId);
-                if (!MovieService.PlayingEnabled) 
+                if (PlayEnabled)
+                    PlayMovie(roomId);
+                if (PlayEnabled)
+                    PlayAdvert(roomId);
+                if (!PlayEnabled)
                     MyThread.Wait(1000);
-            } while (true);
+            } while (PlayEnabled);
         }
 
         public static void StopPlay()
         {
-            PlayingEnabled = false;
+            PlayEnabled = false;
 
-            Process[] processes = Process.GetProcessesByName(Settings.Default.PlayerProcessName);
+            var processes = Process.GetProcessesByName(Settings.Default.PlayerProcessName);
             if (processes.Length == 1) {
                 processes[0].Kill();
             }
@@ -68,9 +63,9 @@ namespace Douyu.Client
 
         static void PlayAdvert(int roomId)
         {
-            string advertFile = Properties.Settings.Default.MovieDir + "\\" + roomId + ".mp4";
+            var advertFile = DbService.GetAdvertMovie(roomId);
             if (!File.Exists(advertFile)) {
-                MessageBox.Show("没有找到视频文件: " + advertFile);
+                MessageBox.Show("没有找到广告文件: " + advertFile, "播放广告", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             PlayMovie(advertFile);
@@ -80,11 +75,16 @@ namespace Douyu.Client
 
         static void PlayMovie(int roomId)
         {
-            string movieFile;
-            string movieName;
+            var movieFile = "";
+            var movieName = "";
             DbService.GetTopMovie(roomId, out movieName, out movieFile);
+            var advertFile = DbService.GetAdvertMovie(roomId);
+            if (!File.Exists(advertFile)) {
+                MessageBox.Show("没有找到广告文件: " + advertFile, "播放广告", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             PlayMovie(movieFile);
-            DbService.ClearTopMovie(roomId, movieFile);
+            DbService.ClearMovieScore(roomId, movieFile);
             DbService.SetCurrentMovie(roomId, movieName);
             WaitPlayingFinish();
             MyThread.Wait(1000);
@@ -100,12 +100,12 @@ namespace Douyu.Client
         static void PlayMovie(string movieName)
         {
             Process.Start(Settings.Default.MoviePlayer, movieName);
-            if (StartPlayMovie != null)
-                StartPlayMovie(movieName);
+            if (StartingPlayMovie != null)
+                StartingPlayMovie(movieName);
         }
 
-        static bool PlayingEnabled { get; set; }
+        static bool PlayEnabled { get; set; }
 
-        public static event Action<string> StartPlayMovie;
+        public static event Action<string> StartingPlayMovie;
     }
 }

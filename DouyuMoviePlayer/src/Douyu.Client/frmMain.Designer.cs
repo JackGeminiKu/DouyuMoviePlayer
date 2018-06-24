@@ -38,6 +38,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnStopPlay = new System.Windows.Forms.Button();
             this.btnCreateAlias = new System.Windows.Forms.Button();
+            this.btnImportAdvert = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -68,7 +69,7 @@
             // 
             this.btnImportMovie.Location = new System.Drawing.Point(296, 76);
             this.btnImportMovie.Name = "btnImportMovie";
-            this.btnImportMovie.Size = new System.Drawing.Size(121, 23);
+            this.btnImportMovie.Size = new System.Drawing.Size(78, 23);
             this.btnImportMovie.TabIndex = 3;
             this.btnImportMovie.Text = "导入电影";
             this.btnImportMovie.UseVisualStyleBackColor = true;
@@ -123,19 +124,30 @@
             // 
             // btnCreateAlias
             // 
-            this.btnCreateAlias.Location = new System.Drawing.Point(448, 76);
+            this.btnCreateAlias.Location = new System.Drawing.Point(491, 76);
             this.btnCreateAlias.Name = "btnCreateAlias";
-            this.btnCreateAlias.Size = new System.Drawing.Size(121, 23);
+            this.btnCreateAlias.Size = new System.Drawing.Size(78, 23);
             this.btnCreateAlias.TabIndex = 10;
             this.btnCreateAlias.Text = "添加别名";
             this.btnCreateAlias.UseVisualStyleBackColor = true;
             this.btnCreateAlias.Click += new System.EventHandler(this.btnCreateAlias_Click);
+            // 
+            // btnImportAdvert
+            // 
+            this.btnImportAdvert.Location = new System.Drawing.Point(392, 76);
+            this.btnImportAdvert.Name = "btnImportAdvert";
+            this.btnImportAdvert.Size = new System.Drawing.Size(78, 23);
+            this.btnImportAdvert.TabIndex = 11;
+            this.btnImportAdvert.Text = "导入广告";
+            this.btnImportAdvert.UseVisualStyleBackColor = true;
+            this.btnImportAdvert.Click += new System.EventHandler(this.btnImportAdvert_Click);
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(580, 112);
+            this.Controls.Add(this.btnImportAdvert);
             this.Controls.Add(this.btnCreateAlias);
             this.Controls.Add(this.btnStopPlay);
             this.Controls.Add(this.label1);
@@ -171,6 +183,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnStopPlay;
         private System.Windows.Forms.Button btnCreateAlias;
+        private System.Windows.Forms.Button btnImportAdvert;
     }
 }
 
