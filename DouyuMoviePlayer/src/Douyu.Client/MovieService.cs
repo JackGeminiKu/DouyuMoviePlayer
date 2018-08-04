@@ -68,6 +68,7 @@ namespace Douyu.Client
             DoPlayMovie(movieFile);
 
             DbService.SetCurrentMovie(RoomId, movieName);
+            Obs.SetCurrentMovie(movieName);
             DbService.UpdateMoviePlaytime(RoomId, movieName);
             DbService.ClearMovieScore(RoomId, movieName);
             WaitPlayingFinish();
