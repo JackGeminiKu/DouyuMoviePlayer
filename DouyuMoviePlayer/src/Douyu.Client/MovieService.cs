@@ -7,31 +7,30 @@ using System.Diagnostics;
 using System.Threading;
 using Douyu.Properties;
 using System.IO;
+using Jack4net.Log;
 
 namespace Douyu.Client
 {
     public static class MovieService
     {
-        public static void StartPlay(int roomId)
+        public static int RoomId { get { return 122402; } }
+
+        public static void StartPlay()
         {
             PlayEnabled = true;
+
             // 当前正在播放?
             if (IsPlaying) {
-                if (IsPlayingAdvert) {
-                    WaitPlayingFinish();
-                } else {
-                    WaitPlayingFinish();
-                    if (PlayEnabled)
-                        PlayAdvert(roomId);
-                }
+                WaitPlayingFinish();
+                PlayAdvert();
             }
 
             // 按序播放
             do {
                 if (PlayEnabled)
-                    PlayMovie(roomId);
+                    PlayMovie();
                 if (PlayEnabled)
-                    PlayAdvert(roomId);
+                    PlayAdvert();
                 if (!PlayEnabled)
                     MyThread.Wait(1000);
             } while (PlayEnabled);
@@ -42,52 +41,36 @@ namespace Douyu.Client
             PlayEnabled = false;
 
             var processes = Process.GetProcessesByName(Settings.Default.PlayerProcessName);
-            if (processes.Length == 1) {
-                processes[0].Kill();
+            foreach (var process in processes) {
+                process.Kill();
             }
         }
 
-        static bool IsPlaying
+        static bool PlayEnabled { get; set; }
+
+        public static bool IsPlaying
         {
             get { return Process.GetProcessesByName(Settings.Default.PlayerProcessName).Length != 0; }
         }
 
-        static bool IsPlayingAdvert
+        static void PlayAdvert()
         {
-            get
-            {
-                return MessageBox.Show("正在播放广告?", "正在播放", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-                    == DialogResult.Yes;
-            }
-        }
-
-        static void PlayAdvert(int roomId)
-        {
-            var advertFile = DbService.GetAdvertMovie(roomId);
-            if (!File.Exists(advertFile)) {
-                MessageBox.Show("没有找到广告文件: " + advertFile, "播放广告", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            PlayMovie(advertFile);
+            var advertFile = DbService.GetAdvertMovie(RoomId);
+            DoPlayMovie(advertFile);
             WaitPlayingFinish();
-            MyThread.Wait(1000);
         }
 
-        static void PlayMovie(int roomId)
+        static void PlayMovie()
         {
             var movieFile = "";
             var movieName = "";
-            DbService.GetTopMovie(roomId, out movieName, out movieFile);
-            var advertFile = DbService.GetAdvertMovie(roomId);
-            if (!File.Exists(advertFile)) {
-                MessageBox.Show("没有找到广告文件: " + advertFile, "播放广告", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            PlayMovie(movieFile);
-            DbService.ClearMovieScore(roomId, movieFile);
-            DbService.SetCurrentMovie(roomId, movieName);
+            DbService.GetTopMovie(RoomId, out movieName, out movieFile);
+            DoPlayMovie(movieFile);
+
+            DbService.SetCurrentMovie(RoomId, movieName);
+            DbService.UpdateMoviePlaytime(RoomId, movieName);
+            DbService.ClearMovieScore(RoomId, movieName);
             WaitPlayingFinish();
-            MyThread.Wait(1000);
         }
 
         static void WaitPlayingFinish()
@@ -95,17 +78,33 @@ namespace Douyu.Client
             do {
                 MyThread.Wait(1000);
             } while (IsPlaying);
+            MyThread.Wait(1000);
         }
 
-        static void PlayMovie(string movieName)
+        static void DoPlayMovie(string movieName)
         {
+            if (!File.Exists(movieName)) {
+                LogService.WarnFormat("没有找到播放文件: {0}", movieName);
+                return;
+            }
+
             Process.Start(Settings.Default.MoviePlayer, movieName);
             if (StartingPlayMovie != null)
-                StartingPlayMovie(movieName);
+                StartingPlayMovie(null, new StartPlayMovieEventArgs(movieName));
         }
 
-        static bool PlayEnabled { get; set; }
+        public static event EventHandler<StartPlayMovieEventArgs> StartingPlayMovie;
+    }
 
-        public static event Action<string> StartingPlayMovie;
+
+
+    public class StartPlayMovieEventArgs : EventArgs
+    {
+        public StartPlayMovieEventArgs(string movieName)
+        {
+            MovieName = movieName;
+        }
+
+        public string MovieName { get; private set; }
     }
 }

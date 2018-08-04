@@ -28,23 +28,17 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            this.bwMoviePlayer = new System.ComponentModel.BackgroundWorker();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblMovieName = new System.Windows.Forms.Label();
             this.btnImportMovie = new System.Windows.Forms.Button();
             this.btnStartPlay = new System.Windows.Forms.Button();
             this.txtRoomId = new System.Windows.Forms.TextBox();
-            this.btnSaveRoom = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.btnStopPlay = new System.Windows.Forms.Button();
             this.btnCreateAlias = new System.Windows.Forms.Button();
             this.btnImportAdvert = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // bwMoviePlayer
-            // 
-            this.bwMoviePlayer.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bwMoviePlayer_DoWork);
             // 
             // groupBox1
             // 
@@ -89,28 +83,20 @@
             // 
             this.txtRoomId.Location = new System.Drawing.Point(350, 12);
             this.txtRoomId.Name = "txtRoomId";
-            this.txtRoomId.Size = new System.Drawing.Size(128, 25);
+            this.txtRoomId.ReadOnly = true;
+            this.txtRoomId.Size = new System.Drawing.Size(218, 25);
             this.txtRoomId.TabIndex = 5;
             this.txtRoomId.Text = "122402";
-            // 
-            // btnSaveRoom
-            // 
-            this.btnSaveRoom.Location = new System.Drawing.Point(494, 14);
-            this.btnSaveRoom.Name = "btnSaveRoom";
-            this.btnSaveRoom.Size = new System.Drawing.Size(75, 23);
-            this.btnSaveRoom.TabIndex = 6;
-            this.btnSaveRoom.Text = "保存房间";
-            this.btnSaveRoom.UseVisualStyleBackColor = true;
-            this.btnSaveRoom.Click += new System.EventHandler(this.btnSaveRoom_Click);
+            this.txtRoomId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(296, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(47, 17);
+            this.label1.Size = new System.Drawing.Size(54, 17);
             this.label1.TabIndex = 7;
-            this.label1.Text = "房间号";
+            this.label1.Text = "房间号:";
             // 
             // btnStopPlay
             // 
@@ -151,7 +137,6 @@
             this.Controls.Add(this.btnCreateAlias);
             this.Controls.Add(this.btnStopPlay);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnSaveRoom);
             this.Controls.Add(this.txtRoomId);
             this.Controls.Add(this.btnStartPlay);
             this.Controls.Add(this.btnImportMovie);
@@ -164,6 +149,7 @@
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "斗鱼电影播放系统";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Shown += new System.EventHandler(this.frmMain_Shown);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -173,13 +159,11 @@
 
         #endregion
 
-        private System.ComponentModel.BackgroundWorker bwMoviePlayer;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnImportMovie;
         private System.Windows.Forms.Button btnStartPlay;
         private System.Windows.Forms.Label lblMovieName;
         private System.Windows.Forms.TextBox txtRoomId;
-        private System.Windows.Forms.Button btnSaveRoom;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnStopPlay;
         private System.Windows.Forms.Button btnCreateAlias;

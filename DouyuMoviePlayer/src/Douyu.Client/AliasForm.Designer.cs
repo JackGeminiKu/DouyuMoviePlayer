@@ -109,7 +109,7 @@
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.Name = "AliasForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AliasForm";
             this.ResumeLayout(false);
             this.PerformLayout();

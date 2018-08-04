@@ -49,18 +49,6 @@ namespace Douyu.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("122402")]
-        public int SavedRoom {
-            get {
-                return ((int)(this["SavedRoom"]));
-            }
-            set {
-                this["SavedRoom"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=10.0.0.2;Initial Catalog=Douyu2;User ID=sa;Password=Jack52664638")]
         public string ConnectionString {
             get {
