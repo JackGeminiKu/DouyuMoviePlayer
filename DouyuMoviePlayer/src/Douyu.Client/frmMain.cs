@@ -139,7 +139,7 @@ namespace Douyu.Client
         {
             if (_scoreTipsFile == null) {
                 _scoreTipsFile = new ScrollFile("ScoreTips.txt");
-                _scoreTipsFile.AddMessage("【1条弹幕=100鱼丸=1赞=100分~1弱=400分】");
+                _scoreTipsFile.AddMessage("【1弹幕=100鱼丸=1赞=100分~1弱=400分】");
                 _scoreTipsFile.AddMessage("【办卡1.5万~飞机28万~火箭150万~超级火箭=666万】");
                 _scoreTipsFile.AddMessage("【查询积分命令：#查询】");
             }

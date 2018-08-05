@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="MoviePlayer" Type="System.String" Scope="User">
-      <Value Profile="(Default)">C:\Program Files\DAUM\PotPlayer\PotPlayerMini64.exe</Value>
+      <Value Profile="(Default)">C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe</Value>
     </Setting>
     <Setting Name="PlayerProcessName" Type="System.String" Scope="User">
       <Value Profile="(Default)">PotPlayerMini64</Value>

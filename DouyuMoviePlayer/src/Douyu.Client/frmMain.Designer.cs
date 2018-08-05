@@ -132,7 +132,7 @@
             // 
             // tmrScrollFile
             // 
-            this.tmrScrollFile.Interval = 3000;
+            this.tmrScrollFile.Interval = 10000;
             this.tmrScrollFile.Tick += new System.EventHandler(this.tmrScrollFile_Tick);
             // 
             // frmMain
