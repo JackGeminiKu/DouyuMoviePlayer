@@ -42,7 +42,8 @@ namespace Douyu.Client
 
         private void frmMain_Shown(object sender, EventArgs e)
         {
-            tmrScrollFile.Start();
+            tmrScrollPlayTips.Start();
+            tmrScrollScoreTips.Start();
             StartPlay();
         }
 
@@ -135,7 +136,7 @@ namespace Douyu.Client
         ScrollFile _scoreTipsFile;
         ScrollFile _playTipsFile;
 
-        private void tmrScrollFile_Tick(object sender, EventArgs e)
+        private void tmrScrollScoreTips_Tick(object sender, EventArgs e)
         {
             if (_scoreTipsFile == null) {
                 _scoreTipsFile = new ScrollFile("ScoreTips.txt");
@@ -144,13 +145,16 @@ namespace Douyu.Client
                 _scoreTipsFile.AddMessage("【查询积分命令：#查询】");
             }
             _scoreTipsFile.ShowNext();
+        }
 
+        private void tmrScrollPlayTips_Tick(object sender, EventArgs e)
+        {
             if (_playTipsFile == null) {
                 _playTipsFile = new ScrollFile("PlayTips.txt");
                 _playTipsFile.AddMessage("↓按积分多少排序播放↓");
                 _playTipsFile.AddMessage("点播命令：#电影名-积分");
             }
             _playTipsFile.ShowNext();
-        }
+        }        
     }
 }

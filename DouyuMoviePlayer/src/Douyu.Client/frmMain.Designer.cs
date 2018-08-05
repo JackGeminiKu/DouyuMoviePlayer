@@ -38,7 +38,8 @@
             this.btnStopPlay = new System.Windows.Forms.Button();
             this.btnCreateAlias = new System.Windows.Forms.Button();
             this.btnImportAdvert = new System.Windows.Forms.Button();
-            this.tmrScrollFile = new System.Windows.Forms.Timer(this.components);
+            this.tmrScrollPlayTips = new System.Windows.Forms.Timer(this.components);
+            this.tmrScrollScoreTips = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -130,10 +131,15 @@
             this.btnImportAdvert.UseVisualStyleBackColor = true;
             this.btnImportAdvert.Click += new System.EventHandler(this.btnImportAdvert_Click);
             // 
-            // tmrScrollFile
+            // tmrScrollPlayTips
             // 
-            this.tmrScrollFile.Interval = 10000;
-            this.tmrScrollFile.Tick += new System.EventHandler(this.tmrScrollFile_Tick);
+            this.tmrScrollPlayTips.Interval = 3000;
+            this.tmrScrollPlayTips.Tick += new System.EventHandler(this.tmrScrollPlayTips_Tick);
+            // 
+            // tmrScrollScoreTips
+            // 
+            this.tmrScrollScoreTips.Interval = 5000;
+            this.tmrScrollScoreTips.Tick += new System.EventHandler(this.tmrScrollScoreTips_Tick);
             // 
             // frmMain
             // 
@@ -175,7 +181,8 @@
         private System.Windows.Forms.Button btnStopPlay;
         private System.Windows.Forms.Button btnCreateAlias;
         private System.Windows.Forms.Button btnImportAdvert;
-        private System.Windows.Forms.Timer tmrScrollFile;
+        private System.Windows.Forms.Timer tmrScrollPlayTips;
+        private System.Windows.Forms.Timer tmrScrollScoreTips;
     }
 }
 
