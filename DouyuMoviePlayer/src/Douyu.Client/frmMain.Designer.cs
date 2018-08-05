@@ -27,6 +27,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblMovieName = new System.Windows.Forms.Label();
@@ -37,6 +38,7 @@
             this.btnStopPlay = new System.Windows.Forms.Button();
             this.btnCreateAlias = new System.Windows.Forms.Button();
             this.btnImportAdvert = new System.Windows.Forms.Button();
+            this.tmrScrollFile = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -128,6 +130,11 @@
             this.btnImportAdvert.UseVisualStyleBackColor = true;
             this.btnImportAdvert.Click += new System.EventHandler(this.btnImportAdvert_Click);
             // 
+            // tmrScrollFile
+            // 
+            this.tmrScrollFile.Interval = 3000;
+            this.tmrScrollFile.Tick += new System.EventHandler(this.tmrScrollFile_Tick);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -168,6 +175,7 @@
         private System.Windows.Forms.Button btnStopPlay;
         private System.Windows.Forms.Button btnCreateAlias;
         private System.Windows.Forms.Button btnImportAdvert;
+        private System.Windows.Forms.Timer tmrScrollFile;
     }
 }
 

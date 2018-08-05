@@ -70,6 +70,7 @@
     </Compile>
     <Compile Include="src\Douyu.Client\MovieService.cs" />
     <Compile Include="src\Douyu.Client\Obs.cs" />
+    <Compile Include="src\Douyu.Client\ScrollFile.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="src\Douyu.Client\AliasForm.resx">
