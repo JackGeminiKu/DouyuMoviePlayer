@@ -6,7 +6,7 @@
       <Value Profile="(Default)">C:\Program Files (x86)\DAUM\PotPlayer\PotPlayerMini.exe</Value>
     </Setting>
     <Setting Name="PlayerProcessName" Type="System.String" Scope="User">
-      <Value Profile="(Default)">PotPlayerMini64</Value>
+      <Value Profile="(Default)">PotPlayerMini</Value>
     </Setting>
     <Setting Name="ConnectionString" Type="System.String" Scope="User">
       <Value Profile="(Default)">Data Source=10.0.0.2;Initial Catalog=Douyu2;User ID=sa;Password=Jack52664638</Value>

@@ -37,7 +37,7 @@ namespace Douyu.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("PotPlayerMini64")]
+        [global::System.Configuration.DefaultSettingValueAttribute("PotPlayerMini")]
         public string PlayerProcessName {
             get {
                 return ((string)(this["PlayerProcessName"]));
