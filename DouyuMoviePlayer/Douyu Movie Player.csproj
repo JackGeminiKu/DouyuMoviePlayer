@@ -35,8 +35,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>camera.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dapper, Version=1.50.2.0, Culture=neutral, processorArchitecture=MSIL">
@@ -104,6 +103,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="camera.ico" />
     <Content Include="image\camera.ico" />
   </ItemGroup>
   <ItemGroup>
