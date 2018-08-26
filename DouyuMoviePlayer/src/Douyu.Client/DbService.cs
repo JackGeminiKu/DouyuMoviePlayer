@@ -143,10 +143,23 @@ namespace Douyu.Client
 
         public static void SetCurrentMovie(int roomId, string movieName)
         {
-            _conn.Execute(
-                "update RoomInfo set value = @MovieName where RoomId = @RoomId and Name = 'current movie'",
-                new { RoomId = roomId, MovieName = movieName }
+            const string ITEM_CURRENT_MOVIE = "CurrentMovie";
+
+            var count = _conn.ExecuteScalar<int>("select count(*) from RoomInfo where RoomId = @RoomId and Name = @Name",
+                new { RoomId = roomId, Name = ITEM_CURRENT_MOVIE }
             );
+
+            if (count == 1) {
+                _conn.Execute(
+                    "update RoomInfo set value = @MovieName where RoomId = @RoomId and Name = @Name",
+                    new { RoomId = roomId, MovieName = movieName, Name = ITEM_CURRENT_MOVIE }
+                );
+            } else {
+                _conn.Execute(
+                    "insert into RoomInfo(RoomId, Name, Value) Values(@RoomId, @Name, @Value)",
+                    new { RoomId = roomId, Name = ITEM_CURRENT_MOVIE, Value = movieName }
+                );
+            }
         }
 
         public static void UpdateMoviePlaytime(int roomId, string movieName)
