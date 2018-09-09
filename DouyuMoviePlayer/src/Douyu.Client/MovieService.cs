@@ -13,8 +13,6 @@ namespace Douyu.Client
 {
     public static class MovieService
     {
-        public static int RoomId { get { return 122402; } }
-
         public static void StartPlay()
         {
             PlayEnabled = true;
@@ -55,7 +53,7 @@ namespace Douyu.Client
 
         static void PlayAdvert()
         {
-            var advertFile = DbService.GetAdvertMovie(RoomId);
+            var advertFile = DbService.GetAdvertMovie(AppSettings.RoomId);
             DoPlayMovie(advertFile);
             WaitPlayingFinish();
         }
@@ -64,13 +62,13 @@ namespace Douyu.Client
         {
             var movieFile = "";
             var movieName = "";
-            DbService.GetTopMovie(RoomId, out movieName, out movieFile);
+            DbService.GetTopMovie(AppSettings.RoomId, out movieName, out movieFile);
             DoPlayMovie(movieFile);
 
-            DbService.SetCurrentMovie(RoomId, movieName);
+            DbService.SetCurrentMovie(AppSettings.RoomId, movieName);
             Obs.SetCurrentMovie(movieName);
-            DbService.UpdateMoviePlaytime(RoomId, movieName);
-            DbService.ClearMovieScore(RoomId, movieName);
+            DbService.UpdateMoviePlaytime(AppSettings.RoomId, movieName);
+            DbService.ClearMovieScore(AppSettings.RoomId, movieName);
             WaitPlayingFinish();
         }
 

@@ -85,36 +85,6 @@ namespace Douyu.Client
 
         #endregion
 
-        private void btnCreateAlias_Click(object sender, EventArgs e)
-        {
-            var aliasForm = new AliasForm();
-            aliasForm.ShowDialog();
-        }
-
-        private void btnImportMovie_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
-            if (dialog.ShowDialog() == DialogResult.Cancel)
-                return;
-
-            foreach (string file in Directory.GetFiles(dialog.SelectedPath)) {
-                DbService.ImportMovie(MovieService.RoomId, file);
-            }
-            MessageBox.Show("导入电影完成!", "导入电影");
-        }
-
-        private void btnImportAdvert_Click(object sender, EventArgs e)
-        {
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
-            if (dialog.ShowDialog() == DialogResult.Cancel)
-                return;
-
-            foreach (string file in Directory.GetFiles(dialog.SelectedPath)) {
-                DbService.ImportAdvert(file);
-            }
-            MessageBox.Show("导入广告完成!", "导入广告");
-        }
-
         bool ValidateOperation(string message)
         {
             var password = "";

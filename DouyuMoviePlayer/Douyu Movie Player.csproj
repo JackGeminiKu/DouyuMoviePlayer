@@ -54,12 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\Douyu.Client\AliasForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="src\Douyu.Client\AliasForm.Designer.cs">
-      <DependentUpon>AliasForm.cs</DependentUpon>
-    </Compile>
+    <Compile Include="src\Douyu.Client\AppSettings.cs" />
     <Compile Include="src\Douyu.Client\DbService.cs" />
     <Compile Include="src\Douyu.Client\frmMain.cs">
       <SubType>Form</SubType>
@@ -72,9 +67,6 @@
     <Compile Include="src\Douyu.Client\ScrollFile.cs" />
     <Compile Include="src\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="src\Douyu.Client\AliasForm.resx">
-      <DependentUpon>AliasForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="src\Douyu.Client\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
