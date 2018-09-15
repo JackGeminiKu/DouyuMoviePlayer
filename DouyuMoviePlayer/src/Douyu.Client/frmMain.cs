@@ -20,6 +20,7 @@ namespace Douyu.Client
         {
             InitializeComponent();
             SetFormLocation();
+            this.Text += string.Format("(房间号:{0})", AppSettings.RoomId);
             ShowAppVersion();
             MovieService.StartingPlayMovie += MovieService_StartingPlayMovie;
         }
@@ -44,7 +45,6 @@ namespace Douyu.Client
         {
             tmrScrollPlayTips.Start();
             tmrScrollScoreTips.Start();
-            txtRoomId.Text = AppSettings.RoomId.ToString();
             StartPlay();
         }
 
@@ -126,6 +126,6 @@ namespace Douyu.Client
                 _playTipsFile.AddMessage("点播命令：#电影名-积分");
             }
             _playTipsFile.ShowNext();
-        }        
+        }
     }
 }

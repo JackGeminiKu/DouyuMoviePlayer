@@ -32,8 +32,6 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblMovieName = new System.Windows.Forms.Label();
             this.btnStartPlay = new System.Windows.Forms.Button();
-            this.txtRoomId = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.btnStopPlay = new System.Windows.Forms.Button();
             this.tmrScrollPlayTips = new System.Windows.Forms.Timer(this.components);
             this.tmrScrollScoreTips = new System.Windows.Forms.Timer(this.components);
@@ -61,38 +59,19 @@
             // 
             // btnStartPlay
             // 
-            this.btnStartPlay.Location = new System.Drawing.Point(296, 76);
+            this.btnStartPlay.Location = new System.Drawing.Point(296, 23);
             this.btnStartPlay.Name = "btnStartPlay";
-            this.btnStartPlay.Size = new System.Drawing.Size(121, 23);
+            this.btnStartPlay.Size = new System.Drawing.Size(121, 35);
             this.btnStartPlay.TabIndex = 4;
             this.btnStartPlay.Text = "开始播放";
             this.btnStartPlay.UseVisualStyleBackColor = true;
             this.btnStartPlay.Click += new System.EventHandler(this.btnStartPlay_Click);
             // 
-            // txtRoomId
-            // 
-            this.txtRoomId.Location = new System.Drawing.Point(350, 30);
-            this.txtRoomId.Name = "txtRoomId";
-            this.txtRoomId.ReadOnly = true;
-            this.txtRoomId.Size = new System.Drawing.Size(218, 25);
-            this.txtRoomId.TabIndex = 5;
-            this.txtRoomId.Text = "122402";
-            this.txtRoomId.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(296, 38);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 17);
-            this.label1.TabIndex = 7;
-            this.label1.Text = "房间号:";
-            // 
             // btnStopPlay
             // 
-            this.btnStopPlay.Location = new System.Drawing.Point(448, 76);
+            this.btnStopPlay.Location = new System.Drawing.Point(296, 65);
             this.btnStopPlay.Name = "btnStopPlay";
-            this.btnStopPlay.Size = new System.Drawing.Size(121, 23);
+            this.btnStopPlay.Size = new System.Drawing.Size(121, 35);
             this.btnStopPlay.TabIndex = 8;
             this.btnStopPlay.Text = "停止播放";
             this.btnStopPlay.UseVisualStyleBackColor = true;
@@ -112,10 +91,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 112);
+            this.ClientSize = new System.Drawing.Size(423, 112);
             this.Controls.Add(this.btnStopPlay);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.txtRoomId);
             this.Controls.Add(this.btnStartPlay);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("YaHei Consolas Hybrid", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -125,12 +102,11 @@
             this.MaximizeBox = false;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "斗鱼电影播放系统";
+            this.Text = "斗鱼点播";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Shown += new System.EventHandler(this.frmMain_Shown);
             this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -139,8 +115,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnStartPlay;
         private System.Windows.Forms.Label lblMovieName;
-        private System.Windows.Forms.TextBox txtRoomId;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnStopPlay;
         private System.Windows.Forms.Timer tmrScrollPlayTips;
         private System.Windows.Forms.Timer tmrScrollScoreTips;
