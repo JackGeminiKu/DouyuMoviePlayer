@@ -44,6 +44,7 @@ namespace Douyu.Client
         {
             tmrScrollPlayTips.Start();
             tmrScrollScoreTips.Start();
+            txtRoomId.Text = AppSettings.RoomId.ToString();
             StartPlay();
         }
 

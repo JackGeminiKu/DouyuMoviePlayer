@@ -7,6 +7,6 @@ namespace Douyu.Client
 {
     public class AppSettings
     {
-        public static int RoomId { get { return 122402; } }
+        public static int RoomId { get { return 742805; } }
     }
 }

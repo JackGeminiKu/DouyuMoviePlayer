@@ -62,9 +62,11 @@ namespace Douyu.Client
         {
             var movieFile = "";
             var movieName = "";
-            DbService.GetTopMovie(AppSettings.RoomId, out movieName, out movieFile);
+            var movieId = 0;
+            DbService.GetTopMovie(AppSettings.RoomId, out movieId, out movieName, out movieFile);
             DoPlayMovie(movieFile);
 
+            DbService.CreateMoviePlayHistory(AppSettings.RoomId, movieId);
             DbService.SetCurrentMovie(AppSettings.RoomId, movieName);
             Obs.SetCurrentMovie(movieName);
             DbService.UpdateMoviePlaytime(AppSettings.RoomId, movieName);

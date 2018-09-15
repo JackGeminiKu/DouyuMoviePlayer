@@ -16,18 +16,19 @@ namespace Douyu.Client
     {
         static IDbConnection _conn = new SqlConnection(Properties.Settings.Default.ConnectionString);
 
-        public static void GetTopMovie(int roomId, out string movieName, out string movieFile)
+        public static void GetTopMovie(int roomId, out int movieId, out string movieName, out string movieFile)
         {
-            var movieInfo = _conn.Query(
-                "select top(1) Movie.MovieName, Movie.MovieFile " +
+            var movie = _conn.QueryFirst(
+                "select top(1) Movie.Id, Movie.MovieName, Movie.MovieFile " +
                 "from RoomMovie inner join Movie on RoomMovie.MovieId = Movie.Id " +
                 "where RoomMovie.RoomId = @RoomId " +
                 "order by RoomMovie.MovieScore desc",
                 new { RoomId = roomId }
             );
 
-            movieName = movieInfo.First().MovieName;
-            movieFile = movieInfo.First().MovieFile;
+            movieId = movie.Id;
+            movieName = movie.MovieName;
+            movieFile = movie.MovieFile;
         }
 
         public static string[] GetAllMovies()
@@ -98,6 +99,12 @@ namespace Douyu.Client
                 "set LastPlaytime = GetDate() " +
                 "where RoomId = @RoomId and MovieId = @MovieId",
                 new { RoomId = roomId, MovieId = GetMovieId(roomId, movieName) });
+        }
+
+        public static void CreateMoviePlayHistory(int roomId, int movieId)
+        {
+            _conn.Execute("insert into MoviePlayHistory(RoomId, MovieId, MoviePlayTime) values(@RoomId, @MovieId, getdate())",
+                new { RoomId = roomId, MovieId = movieId });
         }
     }
 }
